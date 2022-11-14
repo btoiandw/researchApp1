@@ -80,11 +80,6 @@
     <div class="contact-form">
         <img alt="" class="avatar" src="{{ asset('img/logo-kpru.png') }}">
         <h4>Research and Development Institute</h4>
-        @if (isset(Auth::user()->email))
-            <script>
-                window.location = "/main/dashboard"
-            </script>
-        @endif
         @if ($message = Session::get('error'))
             <div class="alert alert-danger alert-block">
                 <button type="button" class="close" data-dismiss="alert">x</button>
@@ -95,7 +90,7 @@
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li>Username or Password Incorrect</li>
                     @endforeach
                 </ul>
             </div>
