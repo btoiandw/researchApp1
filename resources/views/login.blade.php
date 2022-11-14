@@ -1,20 +1,16 @@
 @section('title', 'Login')
 @include('main')
-<style>
-    .logo-kpru{
-    width: 200px;
-}
-</style>
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
 
 <body class="cat__pages__login">
     <!-- START: pages/login -->
-    <div class="cat__pages__login cat__pages__login--fullscreen"
+    {{-- <div class="cat__pages__login cat__pages__login--fullscreen"
         style="background-image: url('https://e-student.kpru.ac.th/web2016/img/blur-background05.jpg?fbclid=IwAR2TxsipUFjrqSfiCbB7hW2Nka3elCrc3VEsGrWhLoS5WpWb2WYbe5Zhtao')">
-        <div class="cat__pages__login__block">
+        <div class="cat__pages__login__block ">
             <div class="row">
                 <div class="col-xl-12">
-                    {{-- <img src="{{ asset('img/logo-kpru.png') }}" class="logo-kpru" alt="logo"> --}}
+                    
                     <div class="cat__pages__login__block__promo text-white text-center">
                         <img src="{{ asset('img/logo-kpru.png') }}" class="logo-kpru" alt="logo">
                     </div>
@@ -79,6 +75,46 @@
                 <li class="list-inline-item"><a href="javascript: void(0);">Contacts</a></li>
             </ul>
         </div>
+    </div> --}}
+
+    <div class="contact-form">
+        <img alt="" class="avatar" src="{{ asset('img/logo-kpru.png') }}">
+        <h4>Research and Development Institute</h4>
+        @if (isset(Auth::user()->email))
+            <script>
+                window.location = "/main/dashboard"
+            </script>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form id="form-validation" name="form-validation" method="POST" action="{{ route('login') }}">
+            @csrf
+            <label class="form-label">Username</label>
+            <input id="validation-email" class="form-control" placeholder="Enter Username" name="email" type="email"
+                data-validation="[NOTEMPTY]">
+            <label class="form-label">Password</label>
+            <input id="validation-password" class="form-control password" name="password" type="password"
+                data-validation="[L>=6]" data-validation-message="$ must be at least 6 characters"
+                placeholder="Enter Password">
+            <div class="d-grid col-6 mx-auto">
+                <button type="submit" value="Sign in" name="login">
+                    {{ __('Login') }}
+                </button>
+            </div>
+        </form>
     </div>
     <!-- END: pages/login-alpha -->
 
@@ -95,13 +131,6 @@
                         errorClass: 'has-danger'
                     }
                 }
-            });
-
-            // Show/Hide Password
-            $('.password').password({
-                eyeClass: '',
-                eyeOpenClass: 'icmn-eye',
-                eyeCloseClass: 'icmn-eye-blocked'
             });
 
         });
