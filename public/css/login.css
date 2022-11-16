@@ -15,7 +15,7 @@ body:before {
     background-attachment: fixed;
     -webkit-background-size: cover;
     background-size: cover;
-    filter: grayscale(50%);
+    filter: grayscale(30%);
 
 }
 
@@ -25,8 +25,8 @@ body:before {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 450px;
-    height: 400px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    height: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.75);
     /* height: 400px; */
     padding: 80px 40px;
     background: #F7F5F2;

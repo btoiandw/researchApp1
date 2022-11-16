@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|password'
+        ]);
+        if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
+            $role = Auth::user()->role;
+
+            if ($role == '1') {
+                return view('admin');
+            } elseif ($role == '2') {
+                return view('director');
+            } else {
+                return view('home');
+            }
+        }
     }
 }

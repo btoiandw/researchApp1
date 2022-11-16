@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        dd(20000);
+        return view('admin.pages.home');
     }
 
     /**
